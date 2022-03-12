@@ -19,13 +19,16 @@ def firewall(mode="all"):
             elif len(args) == 3:
                 _, update, context = args
 
-            if hasattr(update, 'callback_query'):
+            if update.callback_query is not None:
                 chat_id = update.callback_query.message.chat_id
             else:
                 if hasattr(update.message, "chat_id"):
                     chat_id = update.message.chat_id
                 else:
                     chat_id = update.message.chat.id
+
+
+                
 
             with open("privileges.yml", "r") as file:
                 privileges = yaml.safe_load(file)
